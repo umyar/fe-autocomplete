@@ -1,7 +1,7 @@
+import { Autocomplete } from "./autocomplete/autocomplete.tsx";
+
 function App() {
-  return (
-    <span>template</span>
-  )
+  return (<Autocomplete />)
 }
 
 export default App
