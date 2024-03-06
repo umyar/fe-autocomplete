@@ -5,7 +5,8 @@ interface IHttpClientOptions {
 }
 
 // TODO: move this to .env
-const API_URL = 'https://65e8a4874bb72f0a9c50025b.mockapi.io/autocomplete';
+// const API_URL = 'https://65e8a4874bb72f0a9c50025b.mockapi.io/autocomplete';
+const API_URL = 'http://localhost:9000';
 
 export function httpClient<T>(url: string, options?: IHttpClientOptions): Promise<T> {
   // TODO: fetch method better handling

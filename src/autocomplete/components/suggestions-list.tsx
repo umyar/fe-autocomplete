@@ -10,8 +10,8 @@ interface ISuggestionsListProps {
 
 export const SuggestionsList = ({suggestions, chooseSuggestion}: ISuggestionsListProps) => {
   const suggestionItems = useMemo(() => {
-    return suggestions.map(({value}) => (
-      <li className="suggestion-item" key={value} onClick={() => chooseSuggestion(value)}>{value}</li>
+    return suggestions.map(({value, id}) => (
+      <li className="suggestion-item" key={id} onClick={() => chooseSuggestion(value)}>{value}</li>
     ))
   }, [suggestions, chooseSuggestion])
 

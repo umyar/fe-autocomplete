@@ -6,4 +6,6 @@ react autocomplete component with zero dependencies
 2. `npm run dev` - run project on localhost
 
 ## TODO
-- [ ] code-formatting (prettier/dprint) - RN just formatting by webstorm
+- [ ] code-formatting (prettier/dprint) - RN just formatting by webstorm ([eslint blogpost](https://eslint.org/blog/2023/10/deprecating-formatting-rules/#what-you-should-do-instead))
+- [ ] stylelint?
+- [ ] 
