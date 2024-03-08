@@ -2,9 +2,7 @@
 react autocomplete component with zero dependencies
 
 Hi! I've made a autocomplete MVP component. Right now it renders simple dropdown but I've already started to implement
-Popover version. Will finish it later. At least you can take a look at the drafts. Also you need to clone simple 
-[backend repo](https://github.com/umyar/be-autocomplete) and run it locally. I'm working on deploy of backend and 
-frontend parts on Vercel.
+Popover version. Will finish it later. At least you can take a look at the drafts.
 
 ## How to start
 You can just open this page: https://fe-autocomplete.vercel.app/
