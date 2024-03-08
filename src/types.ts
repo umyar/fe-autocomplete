@@ -15,7 +15,7 @@ export enum KeyboardKeys {
 
 export interface ISuggestionsCommonProps {
   chooseSuggestion: (value: ISuggestion["value"]) => void;
-  activeElementIndex: number;
+  activeItemIndex: number;
   setFocusedItem: Dispatch<SetStateAction<number>>
   searchString: string;
 }

@@ -11,7 +11,7 @@ export function scrollToActiveElement(
   });
 }
 
-export function getNextFocusedItem(currentIndex: number, key: KeyboardKeys.ArrowUp | KeyboardKeys.ArrowDown, listLength: number): number {
+export function getNextActiveItem(currentIndex: number, key: KeyboardKeys.ArrowUp | KeyboardKeys.ArrowDown, listLength: number): number {
   if (key === KeyboardKeys.ArrowDown) {
     return currentIndex === listLength - 1 ? 0 : ++currentIndex;
   } else {
