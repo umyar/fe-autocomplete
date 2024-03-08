@@ -1,7 +1,7 @@
 .suggestion-list {
   position: absolute;
   top: calc(3rem + 4px);
-  width: calc(100% - 8px); /* TODO: fix this magic */
+  width: 100%;
   max-height: calc(5 * 2rem);
   height: auto;
   padding: 4px;
@@ -10,7 +10,7 @@
   background: white;
   box-shadow: 0 0 4px 4px #E7E5DF;
   overflow: auto;
-  border-radius: calc(4px + 4px); /* TODO: put variables here */
+  border-radius: calc(4px + 4px);
 }
 
 .suggestion-item {
@@ -21,6 +21,18 @@
   border-radius: 4px;
 }
 
-.suggestion-item:hover, .suggestion-item:focus {
+.suggestion-item.active {
   background: #E7E5DF;
+}
+
+.suggestion-item mark {
+  background-color: #E7BB41;
+}
+
+.loading-item {
+  display: flex;
+  justify-content: center;
+  line-height: 2rem;
+  font-size: .7rem;
+  text-transform: uppercase;
 }

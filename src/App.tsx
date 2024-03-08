@@ -1,4 +1,4 @@
-import { Autocomplete } from "./autocomplete/autocomplete.tsx";
+import { Autocomplete } from "./comppnents/autocomplete/autocomplete";
 
 function App() {
   return (
