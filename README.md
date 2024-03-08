@@ -7,15 +7,20 @@ Popover version. Will finish it later. At least you can take a look at the draft
 frontend parts on Vercel.
 
 ## How to start
-1. `npm i` - install dependencies here in root directory
-2. `npm run dev` - run current fe-part
-3. `npm i` - install dependencies in be-part root directory
-4. `npm run dev` - run be-part
+You can just open this page: https://fe-autocomplete.vercel.app/
+
+If you want to run app locally just clone repo, install deps and use listed below scripts. You can clone backend repo as
+well if you need. For connecting to local backend not forget to change `API_URL` variable in `httpClient` (working on
+appropriate `.env` way).
+
+1. `npm i` - install dependencies in root directory (applicable for both of repos)
+2. `npm run dev` - run fe-part
+3. `npm run start` - run be-part
 
 ## TODO
 - [ ] code-formatting (prettier/dprint) - RN just formatting by webstorm ([eslint blogpost](https://eslint.org/blog/2023/10/deprecating-formatting-rules/#what-you-should-do-instead))
 - [ ] stylelint?
-- [ ] api calls optimization (debounce and stale requests cancellation)
+- [ ] api calls optimization (~~debounce~~ and stale requests cancellation)
 - [ ] test interface on mobile devices
 - [ ] test interface in NVDA/VoiceOver/TalkBack
 - [ ] opening dropdown on the top of input (depends on available area for dropdown)

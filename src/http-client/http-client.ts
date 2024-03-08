@@ -5,7 +5,8 @@ interface IHttpClientOptions {
 }
 
 // TODO: move this to .env
-const API_URL = "http://localhost:9000";
+const API_URL = "https://be-autocomplete.vercel.app";
+// const API_URL = "http://localhost:9000";
 
 export function httpClient<T>(
   url: string,
