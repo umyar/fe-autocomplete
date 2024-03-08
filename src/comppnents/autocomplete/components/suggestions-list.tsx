@@ -16,13 +16,13 @@ interface ISuggestionsListProps extends ISuggestionsCommonProps {
 
 // remove forwardRef after migration to Popover
 export const SuggestionsList = forwardRef<HTMLUListElement, ISuggestionsListProps>(
-  ({suggestions, chooseSuggestion, isFetching, activeElementIndex, setFocusedItem, searchString}, ref) => {
+  ({suggestions, chooseSuggestion, isFetching, activeItemIndex, setFocusedItem, searchString}, ref) => {
     const suggestionItems = suggestions.map(({value, id}, index) => {
       return (
         <SuggestionItem
           key={id}
           value={value}
-          activeElementIndex={activeElementIndex}
+          activeItemIndex={activeItemIndex}
           chooseSuggestion={chooseSuggestion}
           searchString={searchString}
           setFocusedItem={setFocusedItem}

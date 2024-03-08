@@ -6,11 +6,12 @@ import {
   KeyboardEvent,
   useCallback,
 } from "react";
+import { useDebouncedCallback } from "../../hooks/useCallbackDebounce.ts";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import {
-  getNextFocusedItem,
+  getNextActiveItem,
   scrollToActiveElement,
-} from "../../utils/getNextFocusedItem";
+} from "../../utils/getNextActiveItem.ts";
 // import { Popover } from "../popover/popover";
 
 import { SuggestionsList } from "./components/suggestions-list";
@@ -31,7 +32,7 @@ export function Autocomplete() {
   const [suggestionsExpanded, setSuggestionsExpanded] =
     useState<boolean>(false);
   const [isFetching, setIsFetching] = useState(false);
-  const [focusedItem, setFocusedItem] = useState(0);
+  const [activeItemIndex, setActiveItemIndex] = useState(0);
 
   const [referenceElement, setRefElement] = useState<HTMLInputElement | null>(
     null,
@@ -43,8 +44,8 @@ export function Autocomplete() {
   };
 
   const resetActiveElement = useCallback(() => {
-    setFocusedItem(0);
-  }, [setFocusedItem]);
+    setActiveItemIndex(0);
+  }, [setActiveItemIndex]);
 
   const closeDropdown = useCallback(() => {
     setSuggestionsExpanded(false);
@@ -81,22 +82,22 @@ export function Autocomplete() {
 
     if (key === KeyboardKeys.ArrowDown || key === KeyboardKeys.ArrowUp) {
       e.preventDefault();
-      const nextFocusedItem = getNextFocusedItem(
-        focusedItem,
+      const nextActiveItemIndex = getNextActiveItem(
+        activeItemIndex,
         key,
         suggestions.length,
       );
-      setFocusedItem(nextFocusedItem);
-      scrollToActiveElement(dropdownRef, nextFocusedItem);
+      setActiveItemIndex(nextActiveItemIndex);
+      scrollToActiveElement(dropdownRef, nextActiveItemIndex);
     }
 
     if (key === KeyboardKeys.Enter) {
-      const activeSuggestion = suggestions[focusedItem];
+      const activeSuggestion = suggestions[activeItemIndex];
       chooseSuggestion(activeSuggestion.value);
     }
   };
 
-  useEffect(() => {
+  const updateSuggestions = () => {
     setIsFetching(true);
     resetActiveElement();
 
@@ -107,6 +108,15 @@ export function Autocomplete() {
       .finally(() => {
         setIsFetching(false);
       });
+  };
+
+  const debouncedSuggestionsUpdate = useDebouncedCallback(
+    updateSuggestions,
+    500,
+  );
+
+  useEffect(() => {
+    debouncedSuggestionsUpdate();
   }, [value]);
 
   const chooseSuggestion = (suggestion: ISuggestion["value"]) => {
@@ -131,29 +141,38 @@ export function Autocomplete() {
         value={value}
         onChange={handleChangeSearchString}
         onFocus={showDropdown}
-        // onBlur={closeDropdown}
         ref={setRefElement}
         className="autocomplete-input"
         type="search"
         autoComplete="off"
         aria-autocomplete="list"
       />
-      {/*<Error error={error} />*/}
       <span className="tip">start to type in some name</span>
       {isSuggestionsVisible && (
         <SuggestionsList
           searchString={value}
-          activeElementIndex={focusedItem}
+          activeItemIndex={activeItemIndex}
           ref={dropdownRef}
           suggestions={suggestions}
-          setFocusedItem={setFocusedItem}
+          setFocusedItem={setActiveItemIndex}
           chooseSuggestion={chooseSuggestion}
           isFetching={isFetching}
         />
       )}
-      {/*<Popover anchorEl={referenceElement} isShown={isSuggestionsVisible} onClickOutside={closeDropdown}>*/}
-      {/*<SuggestionsList activeElement={focusedItem} suggestions={suggestions} chooseSuggestion={chooseSuggestion}*/}
-      {/*                 isFetching={isFetching} />*/}
+      {/*<Popover*/}
+      {/*  anchorEl={referenceElement}*/}
+      {/*  isShown={isSuggestionsVisible}*/}
+      {/*  onClickOutside={closeDropdown}*/}
+      {/*>*/}
+      {/*  <SuggestionsList*/}
+      {/*    searchString={value}*/}
+      {/*    activeItemIndex={activeItemIndex}*/}
+      {/*    ref={dropdownRef}*/}
+      {/*    suggestions={suggestions}*/}
+      {/*    setFocusedItem={setActiveItemIndex}*/}
+      {/*    chooseSuggestion={chooseSuggestion}*/}
+      {/*    isFetching={isFetching}*/}
+      {/*  />*/}
       {/*</Popover>*/}
     </div>
   );

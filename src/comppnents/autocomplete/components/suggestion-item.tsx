@@ -7,7 +7,7 @@ interface ISuggestionItemProps extends ISuggestionsCommonProps {
 }
 
 export const SuggestionItem = ({
-  activeElementIndex,
+  activeItemIndex,
   value,
   chooseSuggestion,
   setFocusedItem,
@@ -35,7 +35,7 @@ export const SuggestionItem = ({
     });
   }, [searchString, value]);
 
-  const className = `suggestion-item ${activeElementIndex === index ? "active" : ""}`;
+  const className = `suggestion-item ${activeItemIndex === index ? "active" : ""}`;
 
   return (
     // I'm not sure that onMouseMove ok here, have to think on it
