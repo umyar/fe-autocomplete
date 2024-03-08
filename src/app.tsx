@@ -6,7 +6,6 @@ function App() {
       <Autocomplete />
     </div>
   );
-
 }
 
 export default App;

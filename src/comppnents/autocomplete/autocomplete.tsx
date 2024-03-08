@@ -6,12 +6,12 @@ import {
   KeyboardEvent,
   useCallback,
 } from "react";
-import { useDebouncedCallback } from "../../hooks/useCallbackDebounce.ts";
+import { useDebouncedCallback } from "../../hooks/useCallbackDebounce";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import {
   getNextActiveItem,
   scrollToActiveElement,
-} from "../../utils/getNextActiveItem.ts";
+} from "../../utils/getNextActiveItem";
 // import { Popover } from "../popover/popover";
 
 import { SuggestionsList } from "./components/suggestions-list";
@@ -50,6 +50,10 @@ export function Autocomplete() {
   const closeDropdown = useCallback(() => {
     setSuggestionsExpanded(false);
     resetActiveElement();
+  }, [setSuggestionsExpanded]);
+
+  const showDropdown = useCallback(() => {
+    setSuggestionsExpanded(true);
   }, [setSuggestionsExpanded]);
 
   const handleClick = (event: MouseEvent) => {
@@ -116,7 +120,11 @@ export function Autocomplete() {
   );
 
   useEffect(() => {
-    debouncedSuggestionsUpdate();
+    if (value) {
+      debouncedSuggestionsUpdate();
+    } else {
+      setSuggestions([]);
+    }
   }, [value]);
 
   const chooseSuggestion = (suggestion: ISuggestion["value"]) => {
@@ -128,12 +136,11 @@ export function Autocomplete() {
   const onlySelectedSuggestion =
     suggestions.length === 1 && suggestions[0].value === value;
   const isSuggestionsVisible = Boolean(
-    suggestionsExpanded && suggestions.length && !onlySelectedSuggestion,
+    suggestionsExpanded &&
+      value &&
+      suggestions.length &&
+      !onlySelectedSuggestion
   );
-
-  const showDropdown = useCallback(() => {
-    setSuggestionsExpanded(true);
-  }, [setSuggestionsExpanded]);
 
   return (
     <div className="autocomplete" onKeyDown={onKeyDown}>
