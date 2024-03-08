@@ -1,0 +1,38 @@
+.suggestion-list {
+  position: absolute;
+  top: calc(3rem + 4px);
+  width: 100%;
+  max-height: calc(5 * 2rem);
+  height: auto;
+  padding: 4px;
+  margin: 0;
+  list-style: none;
+  background: white;
+  box-shadow: 0 0 4px 4px #E7E5DF;
+  overflow: auto;
+  border-radius: calc(4px + 4px);
+}
+
+.suggestion-item {
+  line-height: 2rem;
+  cursor: pointer;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  border-radius: 4px;
+}
+
+.suggestion-item.active {
+  background: #E7E5DF;
+}
+
+.suggestion-item mark {
+  background-color: #E7BB41;
+}
+
+.loading-item {
+  display: flex;
+  justify-content: center;
+  line-height: 2rem;
+  font-size: .7rem;
+  text-transform: uppercase;
+}

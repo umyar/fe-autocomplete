@@ -1,7 +1,12 @@
+import { Autocomplete } from "./comppnents/autocomplete/autocomplete";
+
 function App() {
   return (
-    <span>template</span>
-  )
+    <div>
+      <Autocomplete />
+    </div>
+  );
+
 }
 
-export default App
+export default App;
