@@ -7,9 +7,8 @@ Popover version. Will finish it later. At least you can take a look at the draft
 ## How to start
 You can just open this page: https://fe-autocomplete.vercel.app/
 
-If you want to run app locally just clone repo, install deps and use listed below scripts. You can clone backend repo as
-well if you need. For connecting to local backend not forget to change `API_URL` variable in `httpClient` (working on
-appropriate `.env` way).
+If you want to run app locally just clone repo, install deps and use listed below scripts. You can clone [backend repo](https://github.com/umyar/be-autocomplete)
+as well if you need. For connecting to local backend not forget to change `API_URL` variable in `httpClient` (working on appropriate `.env` way).
 
 1. `npm i` - install dependencies in root directory (applicable for both of repos)
 2. `npm run dev` - run fe-part
