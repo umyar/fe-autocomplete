@@ -1,42 +1,29 @@
-import {
-  useState,
-  ChangeEvent,
-  useEffect,
-  useRef,
-  KeyboardEvent,
-  useCallback,
-} from "react";
-import { useDebouncedCallback } from "../../hooks/useCallbackDebounce";
-import { useOutsideClick } from "../../hooks/useOutsideClick";
-import {
-  getNextActiveItem,
-  scrollToActiveElement,
-} from "../../utils/getNextActiveItem";
+import { useState, ChangeEvent, useEffect, useRef, KeyboardEvent, useCallback } from 'react';
+import { useDebouncedCallback } from '../../hooks/useCallbackDebounce';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { getNextActiveItem, scrollToActiveElement } from '../../utils/getNextActiveItem';
 // import { Popover } from "../popover/popover";
 
-import { SuggestionsList } from "./components/suggestions-list";
-import { httpClient } from "../../http-client/http-client";
-import { ISuggestion, KeyboardKeys } from "../../types";
+import { SuggestionsList } from './components/suggestions-list';
+import { httpClient } from '../../http-client/http-client';
+import { ISuggestion, KeyboardKeys } from '../../types';
 
-import "./autocomplete.css";
+import './autocomplete.css';
 
 const fetchSuggestions = async (searchString: string) => {
-  const searchQuery = searchString ? `?search=${searchString}` : "";
+  const searchQuery = searchString ? `?search=${searchString}` : '';
 
-  return await httpClient<ISuggestion[]>("/names" + searchQuery);
+  return await httpClient<ISuggestion[]>('/names' + searchQuery);
 };
 
 export function Autocomplete() {
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>('');
   const [suggestions, setSuggestions] = useState<ISuggestion[]>([]);
-  const [suggestionsExpanded, setSuggestionsExpanded] =
-    useState<boolean>(false);
+  const [suggestionsExpanded, setSuggestionsExpanded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
 
-  const [referenceElement, setRefElement] = useState<HTMLInputElement | null>(
-    null,
-  );
+  const [referenceElement, setRefElement] = useState<HTMLInputElement | null>(null);
   const dropdownRef = useRef(null);
 
   const handleChangeSearchString = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,20 +32,19 @@ export function Autocomplete() {
 
   const resetActiveElement = useCallback(() => {
     setActiveItemIndex(0);
-  }, [setActiveItemIndex]);
+  }, []);
 
   const closeDropdown = useCallback(() => {
     setSuggestionsExpanded(false);
     resetActiveElement();
-  }, [setSuggestionsExpanded]);
+  }, [resetActiveElement]);
 
   const showDropdown = useCallback(() => {
     setSuggestionsExpanded(true);
   }, [setSuggestionsExpanded]);
 
   const handleClick = (event: MouseEvent) => {
-    const isTriggeredAnchorEl =
-      referenceElement && referenceElement.contains(event.target as Node);
+    const isTriggeredAnchorEl = referenceElement && referenceElement.contains(event.target as Node);
 
     if (!isTriggeredAnchorEl) {
       closeDropdown();
@@ -86,11 +72,7 @@ export function Autocomplete() {
 
     if (key === KeyboardKeys.ArrowDown || key === KeyboardKeys.ArrowUp) {
       e.preventDefault();
-      const nextActiveItemIndex = getNextActiveItem(
-        activeItemIndex,
-        key,
-        suggestions.length,
-      );
+      const nextActiveItemIndex = getNextActiveItem(activeItemIndex, key, suggestions.length);
       setActiveItemIndex(nextActiveItemIndex);
       scrollToActiveElement(dropdownRef, nextActiveItemIndex);
     }
@@ -114,10 +96,7 @@ export function Autocomplete() {
       });
   };
 
-  const debouncedSuggestionsUpdate = useDebouncedCallback(
-    updateSuggestions,
-    500,
-  );
+  const debouncedSuggestionsUpdate = useDebouncedCallback(updateSuggestions, 500);
 
   useEffect(() => {
     if (value) {
@@ -127,20 +106,14 @@ export function Autocomplete() {
     }
   }, [value]);
 
-  const chooseSuggestion = (suggestion: ISuggestion["value"]) => {
+  const chooseSuggestion = (suggestion: ISuggestion['value']) => {
     setValue(suggestion);
     setSuggestionsExpanded(false);
     referenceElement?.blur();
   };
 
-  const onlySelectedSuggestion =
-    suggestions.length === 1 && suggestions[0].value === value;
-  const isSuggestionsVisible = Boolean(
-    suggestionsExpanded &&
-      value &&
-      suggestions.length &&
-      !onlySelectedSuggestion
-  );
+  const onlySelectedSuggestion = suggestions.length === 1 && suggestions[0].value === value;
+  const isSuggestionsVisible = Boolean(suggestionsExpanded && value && suggestions.length && !onlySelectedSuggestion);
 
   return (
     <div className="autocomplete" onKeyDown={onKeyDown}>
@@ -155,6 +128,7 @@ export function Autocomplete() {
         aria-autocomplete="list"
       />
       <span className="tip">start to type in some name</span>
+
       {isSuggestionsVisible && (
         <SuggestionsList
           searchString={value}

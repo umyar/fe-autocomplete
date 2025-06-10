@@ -1,5 +1,4 @@
-import { useCallback } from "react";
-import { ISuggestionsCommonProps } from "../../../types";
+import { ISuggestionsCommonProps } from '../../../types';
 
 interface ISuggestionItemProps extends ISuggestionsCommonProps {
   value: string;
@@ -22,29 +21,24 @@ export const SuggestionItem = ({
     setFocusedItem(index);
   };
 
-  const renderSuggestionValue = useCallback(() => {
+  const renderSuggestionValue = () => {
     if (!searchString) {
       return value;
     }
 
-    const regexp = new RegExp(`(${searchString})`, "gi");
+    const regexp = new RegExp(`(${searchString})`, 'gi');
 
     return value.split(regexp).map((part, index) => {
       if (regexp.test(part)) return <mark key={index}>{part}</mark>;
       return part;
     });
-  }, [searchString, value]);
+  };
 
-  const className = `suggestion-item ${activeItemIndex === index ? "active" : ""}`;
+  const className = `suggestion-item ${activeItemIndex === index ? 'active' : ''}`;
 
   return (
     // I'm not sure that onMouseMove ok here, have to think on it
-    <li
-      className={className}
-      onClick={handleClickSuggestion}
-      onMouseMove={handleMouseMoveOnSuggestion}
-      role="option"
-    >
+    <li className={className} onClick={handleClickSuggestion} onMouseMove={handleMouseMoveOnSuggestion} role="option">
       {renderSuggestionValue()}
     </li>
   );
