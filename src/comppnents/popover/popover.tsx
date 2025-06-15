@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 
-import { useOutsideClick } from "../../hooks/useOutsideClick";
-import { usePortal } from "../../hooks/usePortal";
+import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { usePortal } from '@/hooks/usePortal';
 
 interface Props {
   children: ReactNode;
@@ -11,15 +11,14 @@ interface Props {
   onClickOutside?: (event: MouseEvent) => void;
 }
 
-export function Popover({children, isShown, anchorEl, onClickOutside}: Props) {
+export function Popover({ children, isShown, anchorEl, onClickOutside }: Props) {
   const [popoverStyles, setPopoverStyles] = useState<CSSProperties | undefined>(undefined);
   const popoverRef = useRef<HTMLDivElement>(null);
 
-
   useEffect(() => {
     if (anchorEl) {
-      const {left, width, bottom} = anchorEl.getBoundingClientRect();
-      setPopoverStyles({top: bottom + 4, left, width});
+      const { left, width, bottom } = anchorEl.getBoundingClientRect();
+      setPopoverStyles({ top: bottom + 4, left, width });
     }
   }, [anchorEl]);
 
@@ -33,12 +32,16 @@ export function Popover({children, isShown, anchorEl, onClickOutside}: Props) {
 
   useOutsideClick<HTMLDivElement>(popoverRef, handleClick);
 
-  const portal = usePortal(<div className="popover" style={popoverStyles} ref={popoverRef}>{children}</div>, 'root');
+  const portal = usePortal(
+    <div className="popover" style={popoverStyles} ref={popoverRef}>
+      {children}
+    </div>,
+    'root'
+  );
 
   if (isShown) {
     return portal;
   }
 
   return null;
-
 }

@@ -1,12 +1,12 @@
 import { useState, ChangeEvent, useEffect, useRef, KeyboardEvent, useCallback } from 'react';
-import { useDebouncedCallback } from '../../hooks/useCallbackDebounce';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
-import { getNextActiveItem, scrollToActiveElement } from '../../utils/getNextActiveItem';
+import { useDebouncedCallback } from '@/hooks/useCallbackDebounce';
+import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { getNextActiveItem, scrollToActiveElement } from '@/utils/getNextActiveItem';
 // import { Popover } from "../popover/popover";
 
 import { SuggestionsList } from './components/suggestions-list';
-import { httpClient } from '../../http-client/http-client';
-import { ISuggestion, KeyboardKeys } from '../../types';
+import { httpClient } from '@/http-client/http-client.ts';
+import { ISuggestion, KeyboardKeys } from '@/types.ts';
 
 import './autocomplete.css';
 
@@ -59,7 +59,7 @@ export function Autocomplete() {
     }
 
     const key = e.key;
-    // try to move this closeDropdown() to input onBlur event
+    // TODO: try to move this closeDropdown() to input onBlur event
     if (key === KeyboardKeys.Tab) {
       closeDropdown();
     }
@@ -127,7 +127,9 @@ export function Autocomplete() {
         autoComplete="off"
         aria-autocomplete="list"
       />
-      <span className="tip">start to type in some name</span>
+      <div className="tip">
+        start to type in some name e.g. <span style={{ fontStyle: 'italic' }}>Jason</span>
+      </div>
 
       {isSuggestionsVisible && (
         <SuggestionsList

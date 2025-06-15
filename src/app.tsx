@@ -1,4 +1,4 @@
-import { Autocomplete } from "./comppnents/autocomplete/autocomplete";
+import { Autocomplete } from './comppnents/autocomplete/autocomplete';
 
 function App() {
   return (

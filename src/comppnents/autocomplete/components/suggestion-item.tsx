@@ -1,4 +1,4 @@
-import { ISuggestionsCommonProps } from '../../../types';
+import { ISuggestionsCommonProps } from '@/types.ts';
 
 interface ISuggestionItemProps extends ISuggestionsCommonProps {
   value: string;

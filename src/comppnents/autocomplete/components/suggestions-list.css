@@ -8,7 +8,7 @@
   margin: 0;
   list-style: none;
   background: white;
-  box-shadow: 0 0 4px 4px #E7E5DF;
+  box-shadow: 0 0 4px 4px #e7e5df;
   overflow: auto;
   border-radius: calc(4px + 4px);
 }
@@ -22,17 +22,17 @@
 }
 
 .suggestion-item.active {
-  background: #E7E5DF;
+  background: #e7e5df;
 }
 
 .suggestion-item mark {
-  background-color: #E7BB41;
+  background-color: #e7bb41;
 }
 
 .loading-item {
   display: flex;
   justify-content: center;
   line-height: 2rem;
-  font-size: .7rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
 }
