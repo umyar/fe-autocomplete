@@ -3,11 +3,11 @@ import { forwardRef } from 'react';
 import { SuggestionItem } from './suggestion-item';
 import { ISuggestion, ISuggestionsCommonProps } from '@/types.ts';
 
-import './suggestions-list.css';
+import styles from './suggestions-list.module.css';
 
 const LoadingIndicator = () => {
   return (
-    <li className="loading-item" aria-busy="true">
+    <li className={styles.loadingItem} aria-busy="true">
       loading items...
     </li>
   );
@@ -36,7 +36,7 @@ export const SuggestionsList = forwardRef<HTMLUListElement, ISuggestionsListProp
     });
 
     return (
-      <ul ref={ref} className="suggestion-list">
+      <ul ref={ref} className={styles.suggestionList}>
         {isFetching ? <LoadingIndicator /> : suggestionItems}
       </ul>
     );

@@ -1,5 +1,7 @@
 import { ISuggestionsCommonProps } from '@/types.ts';
 
+import styles from './suggestions-list.module.css';
+
 interface ISuggestionItemProps extends ISuggestionsCommonProps {
   value: string;
   index: number;
@@ -34,7 +36,7 @@ export const SuggestionItem = ({
     });
   };
 
-  const className = `suggestion-item ${activeItemIndex === index ? 'active' : ''}`;
+  const className = `${styles.suggestionItem} ${activeItemIndex === index ? styles.active : ''}`;
 
   return (
     // I'm not sure that onMouseMove ok here, have to think on it
