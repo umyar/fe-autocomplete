@@ -8,7 +8,7 @@ import { SuggestionsList } from './components/suggestions-list';
 import { httpClient } from '@/http-client/http-client.ts';
 import { ISuggestion, KeyboardKeys } from '@/types.ts';
 
-import './autocomplete.css';
+import styles from './autocomplete.module.css';
 
 const fetchSuggestions = async (searchString: string) => {
   const searchQuery = searchString ? `?search=${searchString}` : '';
@@ -116,18 +116,18 @@ export function Autocomplete() {
   const isSuggestionsVisible = Boolean(suggestionsExpanded && value && suggestions.length && !onlySelectedSuggestion);
 
   return (
-    <div className="autocomplete" onKeyDown={onKeyDown}>
+    <div className={styles.autocomplete} onKeyDown={onKeyDown}>
       <input
         value={value}
         onChange={handleChangeSearchString}
         onFocus={showDropdown}
         ref={setRefElement}
-        className="autocomplete-input"
+        className={styles.autocompleteInput}
         type="search"
         autoComplete="off"
         aria-autocomplete="list"
       />
-      <div className="tip">
+      <div className={styles.tip}>
         start to type in some name e.g. <span style={{ fontStyle: 'italic' }}>Jason</span>
       </div>
 
