@@ -1,6 +1,6 @@
 import { useEffect, RefObject, useCallback } from 'react';
 
-export function useOutsideClick<T extends HTMLElement>(ref: RefObject<T>, callback: (event: MouseEvent) => void) {
+export function useOutsideClick<T extends HTMLElement>(ref: RefObject<T | null>, callback: (event: MouseEvent) => void) {
   const handleClick = useCallback(
     (event: MouseEvent) => {
       // for preventing popover close when user selects some text inside popover

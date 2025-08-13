@@ -51,7 +51,7 @@ export function Autocomplete() {
     }
   };
 
-  useOutsideClick(dropdownRef, handleClick);
+  useOutsideClick<HTMLUListElement>(dropdownRef, handleClick);
 
   const onKeyDown = (e: KeyboardEvent) => {
     if (!suggestionsExpanded) {
@@ -74,7 +74,7 @@ export function Autocomplete() {
       e.preventDefault();
       const nextActiveItemIndex = getNextActiveItem(activeItemIndex, key, suggestions.length);
       setActiveItemIndex(nextActiveItemIndex);
-      scrollToActiveElement(dropdownRef, nextActiveItemIndex);
+      scrollToActiveElement<HTMLUListElement>(dropdownRef, nextActiveItemIndex);
     }
 
     if (key === KeyboardKeys.Enter) {

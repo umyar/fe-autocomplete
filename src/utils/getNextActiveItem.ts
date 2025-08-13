@@ -1,7 +1,7 @@
 import { RefObject } from 'react';
 import { KeyboardKeys } from '../types';
 
-export function scrollToActiveElement(dropdownMenuRef: RefObject<HTMLElement>, newActiveOption: number): void {
+export function scrollToActiveElement<T extends HTMLElement>(dropdownMenuRef: RefObject<T | null>, newActiveOption: number): void {
   dropdownMenuRef.current?.children[newActiveOption].scrollIntoView({
     block: 'nearest',
     behavior: 'smooth',
